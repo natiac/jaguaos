@@ -32,11 +32,12 @@ fi
 
 # define parameters
 defineASMParameters $1 $2 $3 $4;
+
 if [ "${P2}" != "" ] ; then
-	defineCodePar1
+	defineCodePar1;
 fi
 if [ "${P3}" != "" ] ; then
-	defineCodePar2
+	defineCodePar2;
 fi
 
 

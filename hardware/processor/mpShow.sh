@@ -13,6 +13,7 @@ do
 	RC=`cat RC.reg`;
 	RD=`cat RD.reg`;
 	PC=`cat PC.reg`;
+	DR=`cat DR.reg`;
 	ACC=`cat ACC.alu`;
 	ZF=`cat ZF.alu`;
 	SF=`cat SF.alu`;
@@ -28,6 +29,8 @@ do
 	echo "RB: ${RB}";
 	echo "RC: ${RC}";
 	echo "RD: ${RD}";
+	echo
+	echo "DR: ${DR}";
 	echo
 	echo "PC: ${PC}";
 	echo; echo

@@ -1,0 +1,4 @@
+stack=100
+vars=Hola Mundo$test$
+varAddr=0120
+code="X0C50120A3AR01A7X0C5012BA3AR01A7"

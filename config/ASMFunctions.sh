@@ -51,18 +51,21 @@ function redefineMov
 
 	testIfRegister ${P2};
 	if [ "${isRegister}" == "1" ] ; then
-		
-		testIfRegister ${P3};
-		if [ "${isRegister}" == "1" ] ; then
-			name="mv1";
-		else
-			temp=${P3/[};
-			temp=${temp/]};
-			if [ “${P3}” == “${temp}” ] ; then	
-				name="mv0";
+		if [ "${P2}" == "DR" ] ; then
+			name="mv4";
+		else	
+			testIfRegister ${P3};
+			if [ "${isRegister}" == "1" ] ; then
+				name="mv1";
 			else
-				name="mv2";
-			fi	
+				temp=${P3/[};
+				temp=${temp/]};
+				if [ “${P3}” == “${temp}” ] ; then	
+					name="mv0";
+				else
+					name="mv2";
+				fi	
+			fi
 		fi	
 	else
 		name="mv3"
@@ -95,6 +98,7 @@ function checkIfParameterIsRegister
 	grep ".${temp};" ${ASMInstDir}/ASMTable.sh >/dev/null && exist=1;
 	return $exist;
 }
+
 
 function defineCodePar1
 {

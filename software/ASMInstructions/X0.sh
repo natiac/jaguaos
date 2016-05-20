@@ -1,8 +1,8 @@
 #!/bin/bash 
 
-# A0.sh
+# X0.sh
 #
-# Move Value to Register (RA, 0123 )
+# Move Direction to Direction Register (DR, 0123 )
 # @author	Sergio Pohlmann <sergio@ycube.net>
 # @date		May, 11 of 2016
 #
@@ -25,6 +25,8 @@ register=`grep ".${regCode};" ${ASMInstDir}/ASMTable.sh | cut -d";" -f 1 | tr -d
 register=${register/.};
 
 echo ${value} > ${mpDir}/${register}.reg; 
+
+
 
 
 

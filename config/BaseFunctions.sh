@@ -51,6 +51,11 @@ function writeToRegister
 	echo ${value} > ${mpDir}/${register}.reg
 }
 
+function readRegister
+{
+	register=${1};
+	echo `cat ${mpDir}/${register}.reg`;
+}
 
 
 function writeMemoryPosition

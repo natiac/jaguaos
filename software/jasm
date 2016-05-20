@@ -1,0 +1,185 @@
+#!/bin/bash 
+
+# jasm
+#
+# Compiles an ASM file to Executable file 
+#
+# @author	Sergio Pohlmann <sergio@ycube.net>
+# @date		May, 03 of 2016
+#
+####################################################
+
+baseDir="/opt";
+
+. ${baseDir}/jaguaOs/config/config.sh
+. ${baseDir}/jaguaOs/config/ASMfunctions.sh
+. ${baseDir}/jaguaOs/config/Basefunctions.sh
+
+
+function useForm
+{
+	echo "		  Use form:"
+	echo ""
+	echo "		  jasm <file.asm>"
+	echo ""
+}
+
+
+function testCommand
+{
+
+	row=${*};
+	command=${1};
+	par1=${2};
+	par2=${3};
+	par3=${4};
+
+	validCommand=1;
+	if [ "${command:0:1}" == ";" ] ; then
+		validCommand=0;
+	fi
+	if [ "${command} " == " " ] ; then
+		validCommand=0;
+	fi
+
+	if [ "${validCommand}" == "1" ]; then
+
+		#echo ${row};
+		echo -n ".";
+
+		case ${command} in 
+
+			"org")
+				stackLengh=${par1};
+				;;
+
+			"define")
+				varName=${par1};
+				varContent=`echo ${row} | cut -d'"' -f 2`;
+				varContent="${varContent}$";
+				vars="${vars}${varContent}";
+				varDir=$(( ${varDir} + 1 ));
+				codeVar="_~"`printf '%02X' ${varDir}`;
+				echo "${varName} ${codeVar} ${#varContent}" >> ${varTempFile}
+				;;
+
+			"mov")
+				if [ "${par2}" == "offset" ] ; then
+
+					# Find Offset
+					par2=`cat ${varTempFile}| grep "${par3}"| cut -d" " -f2`;
+				fi
+
+				# Define Code of function and parameters
+				defineASMParameters "mov" ${par1} ${par2};
+				defineCodePar1;
+				defineCodePar2;
+
+				# Increase the string with code
+				codeString="${codeString}${codeFunction}${codePar1}${codePar2}"
+				;;
+
+			"int")
+
+				# Define Code of function and parameters
+				defineASMParameters "int";
+				defineCodePar1;
+				defineCodePar2;
+
+				# Increase the string with code
+				codeString="${codeString}${codeFunction}"
+				;;
+
+			*)
+				echo "Invalid instruction [${command}] in line [${row}]";
+				echo;
+				#exit 1;
+				;;
+		esac	
+
+	fi
+
+
+}
+
+
+function end
+{
+	rm ${varTempFile} > /dev/null;
+	exit ${1};
+}
+
+
+
+
+header "jasm - jaguaOs Compiler";
+if [ "${1} " == " " ] ; then
+	useForm;
+	exit 0;
+fi
+
+# Define the files of system
+
+# Original File
+file=${1};
+
+# Executable File
+executable=`basename ${file} .asm`".exe";
+
+# Variables temp file
+varDir=0;
+varTempFile="variables.tmp";
+echo -n "" > ${varTempFile};
+
+# Other variables
+codeString="";
+
+
+
+if [ ! -f ${file} ] ; then
+	echo "Inexistent file ${file}"; echo
+	exit 1;
+fi
+
+
+while read line
+do
+	testCommand ${line};
+done < ${file};
+
+
+echo
+echo 
+echo "File compiled to ${executable}"
+echo 
+echo "Compiler information:"
+
+# Define the lengh of the code, and the start of variables address
+codeLengh=${#codeString};
+decStackLengh=`echo $((16#${stackLengh}))`;
+decVarAddr=$(( ${decStackLengh} + ${codeLengh} ));
+varAddr=`printf '%04X' ${decVarAddr}`;
+tempVarAddress=${decVarAddr};
+
+
+echo "Original Code:             $codeString"
+
+while read line
+do
+	oldPosition=`echo $line | cut -d" " -f2`;
+	lengh=`echo $line | cut -d" " -f3`;
+	codeString=${codeString//${oldPosition}/`printf '%04X' ${tempVarAddress}`};
+	tempVarAddress=$(( ${tempVarAddress} + ${lengh}));
+
+done < ${varTempFile}
+
+echo "New Code:                  $codeString"
+
+echo "stack=${stackLengh}" 		>  ${executable};
+echo "vars=${vars}"				>> ${executable};
+echo "varAddr=${varAddr}"		>> ${executable};
+echo "code=\"${codeString}\""	>> ${executable};
+
+
+
+

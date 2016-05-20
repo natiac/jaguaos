@@ -15,8 +15,6 @@ baseDir="/opt";
 . ${baseDir}/jaguaOs/config/Basefunctions.sh
 
 
-echo ========================
-
 parameters=$1
 
 echo "Parameters: ${parameters}"
