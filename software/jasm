@@ -93,7 +93,7 @@ function testCommand
 			*)
 				echo "Invalid instruction [${command}] in line [${row}]";
 				echo;
-				#exit 1;
+				end 1;
 				;;
 		esac	
 
@@ -176,10 +176,11 @@ done < ${varTempFile}
 echo "New Code:                  $codeString"
 
 echo "stack=${stackLengh}" 		>  ${executable};
-echo "vars=${vars}"				>> ${executable};
+echo "vars=\"${vars}\""				>> ${executable};
 echo "varAddr=${varAddr}"		>> ${executable};
 echo "code=\"${codeString}\""	>> ${executable};
 
 
+end 0;
 
 
