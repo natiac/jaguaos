@@ -17,9 +17,10 @@ _add;  		A4;		4;		Sum two registers storing the result in the Object register
 
 _inc;		A5;		2;
 
-_dec;		A6;		2;
+_dec;		A6;		2;      Decrement a Register (-1)
 
 _int;		A7;		0;		Exec a interrupt
+
 
 
 .RA;		C1;				Register RA
