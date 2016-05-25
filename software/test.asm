@@ -5,19 +5,19 @@
 ;
 
 
-org 100							; Define espacio de pila
+org 000							; Define espacio de pila
 
-define string "Hola Mundo"		; Define la variable "string"
+define primera "Hola"		; Define la variable "string"
 
-define otra "test"
+define segunda "test"
 
-mov DR, offset string			; Carga posicion inicial de la variable "string"
-mov AR, 01						; Define llamar funcion "01" de la interrupción
+mov DR, offset primera			; Carga posicion inicial de la variable "string"
+mov RA, 01						; Define llamar funcion "01" de la interrupción
 
 int 							; Llama la interrupcion
 
-mov DR, offset otra
-mov AR, 01
+mov DR, offset segunda
+mov RA, 01
 
 int 							; Llama la interrupción
 

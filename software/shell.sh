@@ -20,10 +20,33 @@ baseDir="/opt";
 function execInstruction
 {
 	command=${1}
+	par1=${2};
 	case ${command} in
 		"dir")
 			ls ${dir};
 			;;
+
+		"prompt")
+			prompt=${par1};
+			;;
+
+		"exit")
+			echo;
+			echo "Thanks for try our jaguaOs!!!";
+			echo;
+			exit 0;
+			;;
+
+		"history")
+			cat .history;
+			echo;
+			if [ "${par1}" == "clear" ] ; then
+				echo "" > .history;
+				echo "History cleaned.";
+				echo;
+			fi
+			;;
+
 		"*")
 			echo "Unrecognized Command";
 			;;
@@ -49,5 +72,6 @@ do
 	echo ""
 	echo -n "$prompt";
 	read command;
+	echo ${command} >> ".history";
 	execInstruction ${command};
 done
