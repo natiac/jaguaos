@@ -26,6 +26,10 @@ function execInstruction
 			ls ${dir};
 			;;
 
+		"cat")
+			cat ${dir}/${par1};
+			;;
+
 		"prompt")
 			prompt=${par1};
 			;;
@@ -47,6 +51,12 @@ function execInstruction
 			fi
 			;;
 
+		"exec")
+			loadFile ${dir}/${par1}.exe;
+			updateMemory;
+			./runProcessor.sh;
+			;;
+
 		"*")
 			echo "Unrecognized Command";
 			;;
@@ -54,8 +64,38 @@ function execInstruction
 }
 
 
+function loadFile
+{
+	. ${1};
+}
 
 
+function updateMemory
+{
+
+	# Preparing variables
+	position=-1; 	# Memory position;
+
+	# Making stack space
+	stackLengh=`echo $((16#${stack}))`;
+	for count in `seq ${stackLengh}` ; do
+		position=$(( ${position} + 1));
+		writeMemoryPosition ${position} "0";
+	done
+	for (( count=0; $count<${#code}; count++ )) ; do 
+		position=$(( ${position} + 1));
+		char=${code:$count:1};
+		writeMemoryPosition ${position} ${char};
+	done
+	for (( count=0; $count<${#vars}; count++ )) ; do 
+		position=$(( ${position} + 1));
+		char=${vars:$count:1};
+		writeMemoryPosition ${position} ${char};
+	done
+
+	# Update Program Counter
+	writeToRegister "PC" ${stack};
+}
 
 
 # Variable definitions
@@ -72,6 +112,8 @@ do
 	echo ""
 	echo -n "$prompt";
 	read command;
-	echo ${command} >> ".history";
-	execInstruction ${command};
+	if [ "${command}" != "" ] ; then
+		echo ${command} >> ".history";
+		execInstruction ${command};
+	fi
 done

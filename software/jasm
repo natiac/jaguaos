@@ -124,7 +124,7 @@ fi
 file=${1};
 
 # Executable File
-executable=`basename ${file} .asm`".exe";
+executable=${diskDir}/`basename ${file} .asm`".exe";
 
 # Variables temp file
 varDir=0;
@@ -176,7 +176,7 @@ done < ${varTempFile}
 echo "New Code:                  $codeString"
 
 echo "stack=${stackLengh}" 		>  ${executable};
-echo "vars=\"${vars}\""			>> ${executable};
+echo "vars='${vars}'"			>> ${executable};
 echo "varAddr=${varAddr}"		>> ${executable};
 echo "code=\"${codeString}\""	>> ${executable};
 

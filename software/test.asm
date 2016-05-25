@@ -5,7 +5,7 @@
 ;
 
 
-org 000							; Define espacio de pila
+org 010							; Define espacio de pila
 
 define primera "Hola"		; Define la variable "string"
 

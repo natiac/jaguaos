@@ -1,3 +1,45 @@
 
 history
 exit
+dir
+history
+exit
+dir
+exit
+cat test.exe
+exit
+exec test
+exit
+exec test
+exit
+cat test
+cat test.exe
+exit
+exec test
+exec test
+exec test
+exec test.exe
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+cat test.exe
+exec test
+cat test.exe
+exec test
+cat test.exe
+exec test
+exec test
+
+exec test

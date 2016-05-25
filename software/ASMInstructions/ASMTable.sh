@@ -21,6 +21,7 @@ _dec;		A6;		2;      Decrement a Register (-1)
 
 _int;		A7;		0;		Exec a interrupt
 
+_end;		A8;		0;		Terminate a program
 
 
 .RA;		C1;				Register RA
