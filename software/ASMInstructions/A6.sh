@@ -36,18 +36,8 @@ if [ "${exist}" == "1" ] ; then
       newVal=$((num1 - 1)) ;
       echo ${newVal} > ${mpDir}/${reg}.reg;
 
-      # Update Flags
-      if [ ${newVal} == "0" ] ; then
-        writeFlag "ZF" 1;
-      else
-        writeFlag "ZF" 0;
-      fi
-
-      if [ ${newVal} -lt "0" ] ; then
-        writeFlag "SF" 1;
-      else
-        writeFlag "SF" 0;
-      fi
+      # Update Accumulator
+      writeACC ${newVal};
 
     else
 	  echo "Incorrect sintax";
