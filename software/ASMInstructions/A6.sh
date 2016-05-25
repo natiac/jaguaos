@@ -33,7 +33,21 @@ if [ "${exist}" == "1" ] ; then
 
       num1=`cat ${mpDir}/${reg}.reg`;
 
-      echo $((num1 - 1)) > ${mpDir}/${reg}.reg;
+      newVal=$((num1 - 1)) ;
+      echo ${newVal} > ${mpDir}/${reg}.reg;
+
+      # Update Flags
+      if [ ${newVal} == "0" ] ; then
+        writeFlag "ZF" 1;
+      else
+        writeFlag "ZF" 0;
+      fi
+
+      if [ ${newVal} -lt "0" ] ; then
+        writeFlag "SF" 1;
+      else
+        writeFlag "SF" 0;
+      fi
 
     else
 	  echo "Incorrect sintax";
