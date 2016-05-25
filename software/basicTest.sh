@@ -43,11 +43,9 @@ testInstruction "mov RA, RB" 	A1C1C2;
 testInstruction "mov RA, [1234]" A2C11234;
 testInstruction "mov [1234], RA" A31234C1;
 testInstruction "mov DR, 1234"	X0C51234;
+testInstruction "dec RA"		A6C1;
 
 
-
-
-echo
 echo
 
 

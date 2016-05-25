@@ -33,7 +33,11 @@ if [ "${exist}" == "1" ] ; then
 
       num1=`cat ${mpDir}/${reg}.reg`;
 
-      echo $((num1 - 1)) > ${mpDir}/${reg}.reg;
+      newVal=$((num1 - 1)) ;
+      echo ${newVal} > ${mpDir}/${reg}.reg;
+
+      # Update Accumulator
+      writeACC ${newVal};
 
     else
 	  echo "Incorrect sintax";
