@@ -24,14 +24,23 @@ function printCharInMemory
 	#echo $memoryPosition $row $col;
 }
 
+
+# Force a screen refresh
+function refreshScreen
+{
+	echo "" > ${ttyDir}/refresh;
+}
+
+
+
 function interrupt
 {
 	function=$(readRegister RA);
 	case $function in
-		"00")
+		"0") # Print char in RB
 			;;
 
-		"01") # Print a string started in a DR address
+		"1") # Print a string started in a DR address
 
 			row=$(readActualRow);
 			col=$(readActualCol);
@@ -64,6 +73,21 @@ function interrupt
 				fi 
 				address=$(( ${address} + 1 ));
 			done
+			refreshScreen;
+			;;
+
+		"2") # Clear String
+
+			row=0;
+			col=0;
+			space=" ";
+			for (( i=0; $i<1600 ; i++)) ; do
+				printCharInMemory "X";
+			done
+
+			# Reset Row and Col
+			row=0;
+			col=0;
 			;;
 
 	esac

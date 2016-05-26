@@ -44,3 +44,31 @@ exec test
 
 exec test
 cat test.exe
+dir
+exec test
+exec test
+exec test
+exec test
+cat test.exe
+exec test
+execv test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exit
+exec test
+exec test
+exec test
+exec test
+exec test
+exit
+exec test
+exec test
+exec test
