@@ -1,0 +1,4 @@
+stack=010
+vars='Hola$test$'
+varAddr=0030
+code="X0C50030A0C101A7X0C50035A0C101A7"

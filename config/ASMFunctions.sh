@@ -123,3 +123,33 @@ function defineCodePar2
 		codePar2=${codePar2/]};
 	fi
 }
+
+
+# Write Value to Accumulator Register
+function writeACC
+{
+	val=${1};
+	echo ${val} > ${mpDir}/ACC.alu;
+
+      # Update Flags
+      if [ ${val} == "0" ] ; then
+        writeFlag "ZF" 1;
+      else
+        writeFlag "ZF" 0;
+      fi
+
+      if [ ${val} -lt "0" ] ; then
+        writeFlag "SF" 1;
+      else
+        writeFlag "SF" 0;
+      fi
+
+}
+
+
+function writeFlag
+{
+	flag=${1};
+	par=${2};
+	echo ${par} > ${mpDir}/${flag}.alu
+}
