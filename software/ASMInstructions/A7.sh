@@ -48,7 +48,7 @@ function interrupt
 			address=`echo $((16#${address}))`;
 			char="";
 			escape=0;
-			backslash="\\";
+			backslash='\';
 			while [ "${char}" != "$" ];
 			do
 				readMemoryPosition ${address};
@@ -59,14 +59,18 @@ function interrupt
 						escape=0;
 						case ${char} in 
 							"t")
-								echo -n "        ";
+								col=$(( ${col} + 8 ));								
 								;;
 							"n")
-								echo
+								col=79;
+								printCharInMemory "space";
 								;;
 						esac
 					else
 						if [ "${char}" != "$" ] ; then
+							if [ "${char}" == " " ] ; then
+								char="space";
+							fi
 							printCharInMemory $char;
 						fi
 					fi
@@ -81,7 +85,7 @@ function interrupt
 			row=0;
 			col=0;
 			for (( i=0; $i<1600 ; i++)) ; do
-				printCharInMemory 'space';
+				printCharInMemory "space";
 			done
 
 			# Reset Row and Col

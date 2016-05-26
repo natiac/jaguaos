@@ -91,6 +91,9 @@ function updateMemory
 	for (( count=0; $count<${#vars}; count++ )) ; do 
 		position=$(( ${position} + 1));
 		char=${vars:$count:1};
+		if [ "${char}" == " " ]; then
+			char="space";
+		fi
 		writeMemoryPosition ${position} ${char};
 	done
 
