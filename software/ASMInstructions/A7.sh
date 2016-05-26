@@ -15,6 +15,14 @@ baseDir="/opt";
 . ${baseDir}/jaguaOs/config/ASMfunctions.sh
 . ${baseDir}/jaguaOs/config/Basefunctions.sh
 
+function printCharInMemory
+{
+	char=${1};
+	memoryPosition=$(( ${startVideoMemory} + $((${row} *80)) + ${col} ));
+	writeMemoryPosition ${memoryPosition} ${char};
+	updateRowCol;
+	#echo $memoryPosition $row $col;
+}
 
 function interrupt
 {
@@ -25,6 +33,8 @@ function interrupt
 
 		"01") # Print a string started in a DR address
 
+			row=$(readActualRow);
+			col=$(readActualCol);
 			address=$(readRegister DR);
 			address=`echo $((16#${address}))`;
 			char="";
@@ -48,7 +58,7 @@ function interrupt
 						esac
 					else
 						if [ "${char}" != "$" ] ; then
-							echo -n $char;
+							printCharInMemory $char;
 						fi
 					fi
 				fi 
@@ -59,4 +69,6 @@ function interrupt
 	esac
 }
 
+defineVideoMemory;
 interrupt;
+writeRowCol;

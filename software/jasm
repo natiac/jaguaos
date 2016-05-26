@@ -60,7 +60,7 @@ function testCommand
 				vars="${vars}${varContent}";
 				varDir=$(( ${varDir} + 1 ));
 				codeVar="_~"`printf '%02X' ${varDir}`;
-				echo "${varName} ${codeVar} ${#varContent}" >> ${varTempFile}
+				echo "${varName} ${codeVar} $(( ${#varContent} +1 ))" >> ${varTempFile}
 				;;
 
 			"mov")
@@ -105,7 +105,7 @@ function testCommand
 
 function end
 {
-	rm ${varTempFile} > /dev/null;
+	#rm ${varTempFile} > /dev/null;
 	exit ${1};
 }
 
