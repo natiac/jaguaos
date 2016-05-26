@@ -12,8 +12,8 @@ define primera "Hola"		; Define la variable "string"
 define segunda "test"
 
 
-mov RA, 2						; Clear String Function
-int
+;mov RA, 2						; Clear String Function
+;int
 
 mov DR, offset primera			; Carga posicion inicial de la variable "string"
 mov RA, 1						; Define llamar funcion "01" de la interrupción

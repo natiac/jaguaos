@@ -47,10 +47,15 @@ function execute
 	# Execute Instruction
 	${ASMInstDir}/${codeInstruction}.sh ${parameters};
 	
-	echo ${codeInstruction} ${parameters};
+	# To debug
+	if [ "${par}" == "debug" ] ; then
+		echo ${codeInstruction} ${parameters};
+	fi
 }
 
 
+
+par=${1};
 
 while true
 do 

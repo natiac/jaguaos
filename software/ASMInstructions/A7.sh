@@ -80,14 +80,14 @@ function interrupt
 
 			row=0;
 			col=0;
-			space=" ";
 			for (( i=0; $i<1600 ; i++)) ; do
-				printCharInMemory "X";
+				printCharInMemory 'space';
 			done
 
 			# Reset Row and Col
 			row=0;
 			col=0;
+			refreshScreen;
 			;;
 
 	esac

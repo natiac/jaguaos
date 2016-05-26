@@ -21,6 +21,7 @@ function execInstruction
 {
 	command=${1}
 	par1=${2};
+	par2=${3};
 	case ${command} in
 		"dir")
 			ls ${dir};
@@ -54,7 +55,7 @@ function execInstruction
 		"exec")
 			loadFile ${dir}/${par1}.exe;
 			updateMemory;
-			./runProcessor.sh;
+			./runProcessor.sh ${par2};			
 			;;
 
 		"*")
