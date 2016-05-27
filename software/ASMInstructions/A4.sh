@@ -51,11 +51,11 @@ if [[ "$isRegister" == "1" ]]; then
 	echo ${expr1hexa} > ${mpDir}/${register2}.reg
 
 	# Update Accumulator
-      writeACC ${expr1hexa};
+      writeACC ${expr1};
 else
 
 	echo ${expr2hexa} > ${mpDir}/${register2}.reg
 	
 	# Update Accumulator
-      writeACC ${expr2hexa};
+      writeACC ${expr2};
 fi
