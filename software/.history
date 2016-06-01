@@ -111,3 +111,14 @@ exec test
 exec test
 dir
 exec test debug
+exec test debug
+exec test
+exec test debug
+exit
+exec test debug
+exit
+exec test debug
+exec test debug
+exec test debug
+exec test debug
+exit

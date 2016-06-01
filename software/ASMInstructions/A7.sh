@@ -25,6 +25,17 @@ function printCharInMemory
 }
 
 
+
+function clearScreen
+{
+	first=${memoryContent:0:$startVideoMemory};
+	echo "${first}" > ${hardDir}/memory/content;
+	for i in `seq 1600` ; do 
+		echo -n " " >> ${hardDir}/memory/content;
+	done
+}
+
+
 # Force a screen refresh
 function refreshScreen
 {
@@ -81,6 +92,13 @@ function interrupt
 			;;
 
 		"2") # Clear String
+			clearScreen;
+			row=0;
+			col=0;
+			refreshScreen;
+			;;	
+
+		"3") # Clear String
 
 			row=0;
 			col=0;

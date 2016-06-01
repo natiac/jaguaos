@@ -39,11 +39,14 @@ header "basicTest - Test instructions from jaguaOs Microprocessor";
 # Test mov instruction.
 
 testInstruction "mov RA, 2"		A0C12;
+testInstruction "mov RB, 1"		A0C21;
+testInstruction "add RA, RB"	A4C1C2;
 testInstruction "mov RA, RB" 	A1C1C2;
 testInstruction "mov RA, [1234]" A2C11234;
 testInstruction "mov [1234], RA" A31234C1;
 testInstruction "mov DR, 1234"	X0C51234;
 testInstruction "dec RA"		A6C1;
+testInstruction "inc RA"		A5C1;
 
 
 echo

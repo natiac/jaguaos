@@ -7,15 +7,26 @@
 
 org 010							; Define espacio de pila
 
-define primera "a\nHola. .\n"		; Define la variable "string"
+define primera "aaaaaa\nHola. .\n"		; Define la variable "string"
 
-define segunda "\tJerpes"
+define segunda "\tasdfasdfas"
+
+
+
+:rutina
+mov DR, offset primera			; Carga posicion inicial de la variable "string"
+
+
+
+
 
 
 mov RA, 2						; Clear Screen Function
 int
 
-mov DR, offset primera			; Carga posicion inicial de la variable "string"
+call rutina						; llama la subrutina
+call rutina						; llama la subrutina
+
 mov RA, 1						; Define llamar funcion "01" de la interrupción
 
 int 							; Llama la interrupcion
