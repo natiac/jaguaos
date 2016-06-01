@@ -47,6 +47,7 @@ testInstruction "mov [1234], RA" A31234C1;
 testInstruction "mov DR, 1234"	X0C51234;
 testInstruction "dec RA"		A6C1;
 testInstruction "inc RA"		A5C1;
+testInstruction "jmp 0123"		A90123;
 
 
 echo

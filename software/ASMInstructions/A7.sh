@@ -98,19 +98,6 @@ function interrupt
 			refreshScreen;
 			;;	
 
-		"3") # Clear String
-
-			row=0;
-			col=0;
-			for (( i=0; $i<1600 ; i++)) ; do
-				printCharInMemory "space";
-			done
-
-			# Reset Row and Col
-			row=0;
-			col=0;
-			refreshScreen;
-			;;
 
 	esac
 }

@@ -15,13 +15,17 @@ _mv4;		X0; 	6;		Move a Direction to the Direction Register
 
 _add;  		A4;		4;		Sum two registers storing the result in the Object register
 
-_inc;		A5;		2;
+_inc;		A5;		2;		Increment a Register (+1)
 
 _dec;		A6;		2;      Decrement a Register (-1)
 
 _int;		A7;		0;		Exec a interrupt
 
 _end;		A8;		0;		Terminate a program
+
+_jmp;		A9;		4;		Salta la ejecución para una posición de memoria
+
+_loop;		AA;		4;		Makes a loop to an Memory Address
 
 
 .RA;		C1;				Register RA
