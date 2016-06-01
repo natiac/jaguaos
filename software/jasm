@@ -25,6 +25,17 @@ function useForm
 }
 
 
+# Prepare the code contents to a body program or to a routine
+function prepareCode
+{
+	code=${1};
+	if [ "${routine} " == " " ]; then
+		codeString=${code};
+	else
+		echo -n ${code} >> $routine.sub;
+	fi
+}
+
 function testCommand
 {
 
@@ -63,6 +74,21 @@ function testCommand
 				echo "${varName} ${codeVar} ${#varContent}" >> ${varTempFile}
 				;;
 
+			":")
+				routine=${par1};
+				echo -n "" > ${routine}.sub;
+				routDir=$(( ${routDir} + 1 ));
+				codeVar="=~"`printf '%02X' ${routDir}`;
+				echo -n "${routine} ${codeVar} " >> ${routTempFile}
+				;;
+
+			"ret")
+				codeRoutine=`cat ${routine}.sub`;
+				echo ${#codeRoutine} >> ${routTempFile};
+				routine="";
+				;;
+
+
 			"mov")
 				if [ "${par2}" == "offset" ] ; then
 
@@ -76,7 +102,7 @@ function testCommand
 				defineCodePar2;
 
 				# Increase the string with code
-				codeString="${codeString}${codeFunction}${codePar1}${codePar2}"
+				prepareCode "${codeString}${codeFunction}${codePar1}${codePar2}"
 				;;
 
 			"int")
@@ -87,7 +113,7 @@ function testCommand
 				defineCodePar2;
 
 				# Increase the string with code
-				codeString="${codeString}${codeFunction}"
+				prepareCode "${codeString}${codeFunction}"
 				;;
 
 			"end")
@@ -98,8 +124,22 @@ function testCommand
 				defineCodePar2;
 
 				# Increase the string with code
-				codeString="${codeString}${codeFunction}"
+				prepareCode "${codeString}${codeFunction}"
 				;;
+
+			"jump")
+
+				# Find Routine Address
+				direction=`cat ${routTempFile}| grep "${par1}"| cut -d" " -f2`;
+
+				# Define Code of function 
+				defineASMParameters "jmp" ${direction} "";
+
+				# Increase the string with code
+				prepareCode "${codeString}${codeFunction}${direction}"
+				;;
+
+
 			*)
 				echo "Invalid instruction [${command}] in line [${row}]";
 				echo;
@@ -116,6 +156,8 @@ function testCommand
 function end
 {
 	#rm ${varTempFile} > /dev/null;
+	#rm *.sub > /dev/null
+	#rm 
 	exit ${1};
 }
 
@@ -141,8 +183,16 @@ varDir=0;
 varTempFile="variables.tmp";
 echo -n "" > ${varTempFile};
 
+#Routines Temp File
+routDir=0;
+routTempFile="routines.tmp";
+echo -n "" > ${routTempFile};
+
+
+
 # Other variables
 codeString="";
+routine="";
 
 
 
@@ -164,6 +214,11 @@ echo "File compiled to ${executable}"
 echo 
 echo "Compiler information:"
 
+
+
+# Force a end instruction at the end of the base code
+codeString="${codeString}A8";
+
 # Define the lengh of the code, and the start of variables address
 codeLengh=${#codeString};
 decStackLengh=`echo $((16#${stackLengh}))`;
@@ -174,6 +229,32 @@ tempVarAddress=${decVarAddr};
 
 echo "Original Code:             $codeString"
 
+routVarAddress=${decVarAddr};
+while read line
+do
+	oldPosition=`echo $line | cut -d" " -f2`;
+	lengh=`echo $line | cut -d" " -f3`;
+	name=`echo $line | cut -d" " -f1`;
+
+#echo $routVarAddress;
+#echo "***** $name $oldPosition $lengh";
+
+	codeString=${codeString//${oldPosition}/`printf '%04X' ${routVarAddress}`};
+	routVarAddress=$(( ${routVarAddress} + ${lengh}));
+
+	codeString="${codeString}`cat ${name}.sub`";
+
+done < ${routTempFile}
+
+tempVarAddress=${routVarAddress};
+
+
+
+
+
+
+
+
 while read line
 do
 	oldPosition=`echo $line | cut -d" " -f2`;
@@ -182,6 +263,7 @@ do
 	tempVarAddress=$(( ${tempVarAddress} + ${lengh}));
 
 done < ${varTempFile}
+
 
 echo "New Code:                  $codeString"
 

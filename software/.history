@@ -122,3 +122,9 @@ exec test debug
 exec test debug
 exec test debug
 exit
+cat test.exe
+exec test
+exec test
+exit
+exec test
+exit
