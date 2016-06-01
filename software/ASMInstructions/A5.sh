@@ -1,8 +1,8 @@
 #!/bin/bash 
 
-# A6.sh
+# A5.sh
 #
-# decrement value of register (dec RA) 
+# Increment value of register (dec RA) 
 #
 # @author	Emilio Centurion
 # @date		May, 23 of 2016
@@ -34,7 +34,7 @@ if [ "${exist}" == "1" ] ; then
       num1=`cat ${mpDir}/${reg}.reg`;
 
       dec=`echo $((16#$num1))`
-      decVal=$(( $dec - 1)) ;
+      decVal=$(( $dec + 1)) ;
       newVal=`echo "obase=16; ${decVal}" | bc`;
 
       echo ${newVal} > ${mpDir}/${reg}.reg;

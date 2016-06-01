@@ -20,16 +20,10 @@ regCode1=${parameters:2:4};
 
 regCode2=${parameters:0:2};
 
-testIfRegister ${regCode1}
-if [[ "$isRegister" == "1" ]]; then
-
-	register1=`grep ".${regCode1};" ${ASMInstDir}/ASMTable.sh | cut -d";" -f 1 | tr -d '[[:space:]]'`;
-	register1=${register1/.};
-	registerValue1=`cat ${mpDir}/${register1}.reg`;
-	dec1=`echo $((16#$registerValue1))`
-	
-fi
-
+register1=`grep ".${regCode1};" ${ASMInstDir}/ASMTable.sh | cut -d";" -f 1 | tr -d '[[:space:]]'`;
+register1=${register1/.};
+registerValue1=`cat ${mpDir}/${register1}.reg`;
+dec1=`echo $((16#$registerValue1))`
 
 register2=`grep ".${regCode2};" ${ASMInstDir}/ASMTable.sh | cut -d";" -f 1 | tr -d '[[:space:]]'`;
 register2=${register2/.};

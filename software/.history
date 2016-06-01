@@ -109,3 +109,5 @@ exec test
 cat test.exe
 exec test
 exec test
+dir
+exec test debug

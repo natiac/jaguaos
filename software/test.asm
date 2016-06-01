@@ -7,9 +7,9 @@
 
 org 010							; Define espacio de pila
 
-define primera "a\nHola. .\n0hhh"		; Define la variable "string"
+define primera "a\nHola. .\n"		; Define la variable "string"
 
-define segunda "\ttest"
+define segunda "\tJerpes"
 
 
 mov RA, 2						; Clear Screen Function
