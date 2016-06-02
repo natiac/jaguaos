@@ -165,3 +165,23 @@ exec test
 exec test step
 exec test
 exit
+jasm test.asm
+exec test
+jasm test.asm
+exec test
+jasm jump.asm
+jasm jmp.asm
+jasm jmp.asm
+jasm jmp.asm
+jasm jmp.asm
+jasm jmp.asm
+jasm jmp.asm
+jasm jmp.asm
+[A
+jasm jmp.asm
+jasm jmp.asm
+jasm jmp.asm
+exec jmp step
+jasm jmp.asm
+exec jmp
+exec jmp step

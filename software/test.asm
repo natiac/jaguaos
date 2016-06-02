@@ -32,11 +32,12 @@ int 							; Llama la interrupción
 end
 
 
-: rutina
+sub rutina
+
 mov DR, offset segunda			; Carga posicion inicial de  "segunda"
 mov RA, 1
 
 int 							; Llama la interrupción
 
-end 							; End Program
+ret 							; End Program
 

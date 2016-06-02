@@ -74,13 +74,30 @@ function testCommand
 				echo "${varName} ${codeVar} ${#varContent}" >> ${varTempFile}
 				;;
 
-			":")
+			"sub")
 				routine=${par1};
 				echo -n "" > ${routine}.sub;
 				routDir=$(( ${routDir} + 1 ));
 				codeVar="=~"`printf '%02X' ${routDir}`;
 				echo -n "${routine} ${codeVar} " >> ${routTempFile}
 				;;
+
+			":")
+				label=${par1};
+
+				# Define Code of function 
+				defineASMParameters "nop" ${direction} "";
+				
+				decStackLengh=`echo $((16#${stackLengh}))`;
+				labelPosition=$(( ${decStackLengh} + ${#codeString} ));
+
+				# Increase the string with code
+				prepareCode "${codeString}${codeFunction}"
+
+
+				echo "${label} ${labelPosition}" >> ${labelTempFile};
+				;;
+
 
 			"ret")
 				codeRoutine=`cat ${routine}.sub`;
@@ -130,10 +147,11 @@ function testCommand
 			"jump")
 
 				# Find Routine Address
-				direction=`cat ${routTempFile}| grep "${par1}"| cut -d" " -f2`;
-
+				direction=`cat ${labelTempFile}| grep "${par1}"| cut -d" " -f2`;
+				direction=`printf '%04X' ${direction}`;
+				
 				# Define Code of function 
-				defineASMParameters "jmp" ${direction} "";
+				defineASMParameters "jmp" direction;
 
 				# Increase the string with code
 				prepareCode "${codeString}${codeFunction}${direction}"
@@ -155,8 +173,9 @@ function testCommand
 
 function end
 {
-	#rm ${varTempFile} > /dev/null;
+	rm ${varTempFile} > /dev/null;
 	#rm *.sub > /dev/null
+	#rm ${labelTempFile} > /dev/null;
 	#rm 
 	exit ${1};
 }
@@ -188,6 +207,10 @@ routDir=0;
 routTempFile="routines.tmp";
 echo -n "" > ${routTempFile};
 
+
+#Labels Temp File
+labelTempFile="labels.tmp";
+echo -n "" > ${labelTempFile};
 
 
 # Other variables
