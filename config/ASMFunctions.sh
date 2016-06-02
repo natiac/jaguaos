@@ -125,24 +125,29 @@ function defineCodePar2
 }
 
 
-# Write Value to Accumulator Register
+# Write Value to Accumulator Register (Parameter is Decimal)
 function writeACC
 {
 	val=${1};
-	echo ${val} > ${mpDir}/ACC.alu;
+	echo "obase=16; ${val}" | bc > ${mpDir}/ACC.alu;
 
-      # Update Flags
-      if [ ${val} == "0" ] ; then
+    # Update Flags
+    if [ ${val} == "0" ] ; then
         writeFlag "ZF" 1;
-      else
+    else
         writeFlag "ZF" 0;
-      fi
+    fi
 
-      if [ ${val} -lt "0" ] ; then
+    if [ ${val} -lt "0" ] ; then
         writeFlag "SF" 1;
-      else
+    else
         writeFlag "SF" 0;
-      fi
+    fi
+
+    touchStatus "ACC";
+    touchStatus "ZF";
+    touchStatus "SF";
+
 
 }
 
@@ -152,4 +157,12 @@ function writeFlag
 	flag=${1};
 	par=${2};
 	echo ${par} > ${mpDir}/${flag}.alu
+}
+
+
+# Create a file to show register status in monitor
+function touchStatus
+{
+	regName=${1};
+	touch ${mpDir}/${regName}.st;
 }

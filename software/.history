@@ -185,3 +185,8 @@ exec jmp step
 jasm jmp.asm
 exec jmp
 exec jmp step
+jasm jmp.asm
+exec jmp
+jasm jmp.asm
+exec jmp
+exit

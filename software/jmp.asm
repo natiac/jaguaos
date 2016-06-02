@@ -22,7 +22,7 @@ mov DR, offset segunda
 mov RA, 1
 int
 
-jump label_A
+jmp label_A
 
 
 : label_B

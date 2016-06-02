@@ -144,12 +144,12 @@ function testCommand
 				prepareCode "${codeString}${codeFunction}"
 				;;
 
-			"jump")
+			"jump" | "jmp")
 
 				# Find Routine Address
 				direction=`cat ${labelTempFile}| grep "${par1}"| cut -d" " -f2`;
 				direction=`printf '%04X' ${direction}`;
-				
+
 				# Define Code of function 
 				defineASMParameters "jmp" direction;
 

@@ -17,7 +17,13 @@ jaguaOsDir="/opt/jaguaOS";
 hardDir="${jaguaOsDir}/hardware";
 
 # DiskDir
-diskDir="${hardDir}/disk/dir"
+diskDir="${hardDir}/disk/dir";
+
+# tty Dir
+ttyDir="${hardDir}/tty";
+
+# Memory Dir
+memDir="${hardDir}/memory";
 
 # Microprocessor
 mpDir="${hardDir}/processor";

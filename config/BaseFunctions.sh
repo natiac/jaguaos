@@ -49,6 +49,9 @@ function writeToRegister
 	register=$1;
 	value=$2;
 	echo ${value} > ${mpDir}/${register}.reg
+
+	touchStatus ${register};
+
 }
 
 function readRegister
@@ -62,7 +65,9 @@ function writeMemoryPosition
 {
 	position=$1;
 	value=$2;
-
+	if [ "${value}" == "space" ] ; then
+		value=" ";
+	fi
 	mem=`cat ${hardDir}/memory/content`;
 
 	lengh=${#mem};
@@ -75,5 +80,65 @@ function writeMemoryPosition
 }
 
 
+# Read instruction from Memory
+function readInstruction
+{
+	pos=${1};
+	temp=`cat ${hardDir}/memory/content`;
+	echo "${temp:${pos}:2}";
+}
+
+
+# Read instructionParameters From Memory
+function readInstructionParameters
+{
+	pos=${1};
+	lengh=${2};
+	temp=`cat ${hardDir}/memory/content`;
+	echo "${temp:${pos}:${lengh}}";
+}
+
+
+
+# Define Video Memory variables
+function defineVideoMemory
+{
+	memoryContent=`cat ${memDir}/content`;
+	totalMemory=${#memoryContent};
+	startVideoMemory=$(( $totalMemory - 1600 ));
+}
+
+
+# Read the position of actual Row
+function readActualRow
+{
+	echo `cat ${ttyDir}/actualRow`;
+}
+
+
+# Read the position of actual Col
+function readActualCol
+{
+	echo `cat ${ttyDir}/actualCol`;
+}
+
+
+# Update Row & Col Data
+function updateRowCol
+{
+	col=$(( ${col} +1 ));
+	if [ ${col} -gt 79 ]; then 
+		col=0;
+		row=$(( ${row} + 1 ));
+	fi
+}
+
+
+# Write the position of actual Row and Col
+function writeRowCol
+{
+	echo ${row} > ${ttyDir}/actualRow;
+	echo ${col} > ${ttyDir}/actualCol;	
+}
 
 
