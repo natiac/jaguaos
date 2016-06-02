@@ -39,6 +39,9 @@ if [ "${exist}" == "1" ] ; then
 
       echo ${newVal} > ${mpDir}/${reg}.reg;
 
+      touchStatus ${reg};
+
+
       # Update Accumulator
       writeACC ${decVal};
 

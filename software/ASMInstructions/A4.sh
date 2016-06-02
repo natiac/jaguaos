@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-# A0.sh
+# A4.sh
 #
 # Sum two registers storing the result in the Object register
 # @author	Ẁilliam Martinez
@@ -53,3 +53,8 @@ else
 	# Update Accumulator
       writeACC ${expr2};
 fi
+
+touchStatus ${register2};
+
+
+

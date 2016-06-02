@@ -26,6 +26,8 @@ register=${register/.};
 
 echo ${value} > ${mpDir}/${register}.reg; 
 
+touchStatus ${register};
+
 
 
 

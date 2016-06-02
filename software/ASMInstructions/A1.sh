@@ -41,6 +41,8 @@ echo "de $source para $dest";
 
 cat ${mpDir}/${source}.reg > ${mpDir}/${dest}.reg; 
 
+touchStatus ${dest};
+
 
 
 

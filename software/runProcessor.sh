@@ -16,6 +16,38 @@ baseDir="/opt";
 . ${baseDir}/jaguaOs/config/Basefunctions.sh
 
 
+# Check the status of an specific register
+function checkStatus
+{
+	reg=${1};
+	regName=`echo ${reg} | cut -d"." -f 1`;
+	regVal=`cat ${mpDir}/${reg}`;
+	if [ -f ${mpDir}/${regName}.st ]; then
+		rm ${mpDir}/${regName}.st;
+		status=" [${regName}:${regVal}] ";
+	else
+		status=" ${regName}:${regVal} ";
+	fi
+	echo -n "${status}" >> ${mpDir}/status;
+}
+
+# Print line with the status of all registers
+function printStatus
+{
+	# Clear status file
+	if [ -f ${mpDir}/status ]; then
+		rm ${mpDir}/status;
+	fi	
+	checkStatus "RA.reg";
+	checkStatus "RB.reg";
+	checkStatus "RC.reg";
+	checkStatus "RD.reg";
+	checkStatus "DR.reg";
+	checkStatus "PC.reg";
+	checkStatus "ACC.alu";
+	checkStatus "ZF.alu";
+	checkStatus "SF.alu";
+}
 
 # Fetch Cycle
 function fetch
@@ -38,6 +70,8 @@ function fetch
 	# Increment the PC
 	position=$(( ${position} + ${instructionLenght} ));
 	writeToRegister "PC" `printf '%04X' ${position}`;
+	touchStatus "PC";
+
 }
 
 
@@ -52,7 +86,10 @@ function execute
 		echo ${codeInstruction} ${parameters};
 	fi
 	if [ "${par}" == "step" ] ; then
-		echo -n ${codeInstruction} ${parameters};
+		touchStatus "PC";
+		printStatus;
+		echo "" > ${ttyDir}/refresh;
+		echo -n ${codeInstruction} ${parameters}"       ";
 		read input;
 	fi
 }
@@ -60,6 +97,11 @@ function execute
 
 
 par=${1};
+
+# Clear status file
+if [ -f ${mpDir}/status ]; then
+	rm ${mpDir}/status;
+fi
 
 while true
 do 

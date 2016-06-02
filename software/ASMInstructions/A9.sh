@@ -22,3 +22,5 @@ position=${parameters:0:4};
 
 writeToRegister "PC" ${position}
 
+touchStatus "PC";
+

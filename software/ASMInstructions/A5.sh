@@ -38,6 +38,9 @@ if [ "${exist}" == "1" ] ; then
       newVal=`echo "obase=16; ${decVal}" | bc`;
 
       echo ${newVal} > ${mpDir}/${reg}.reg;
+      
+      touchStatus ${reg};
+
 
       # Update Accumulator
       writeACC ${decVal};

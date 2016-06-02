@@ -105,3 +105,7 @@ function interrupt
 defineVideoMemory;
 interrupt;
 writeRowCol;
+
+touchStatus "PC";
+
+

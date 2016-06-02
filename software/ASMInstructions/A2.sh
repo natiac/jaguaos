@@ -27,6 +27,8 @@ readMemoryPosition ${position};
 
 writeToRegister ${register} ${char}
 
+touchStatus ${register};
+
 
 
 
