@@ -51,6 +51,10 @@ function execute
 	if [ "${par}" == "debug" ] ; then
 		echo ${codeInstruction} ${parameters};
 	fi
+	if [ "${par}" == "step" ] ; then
+		echo -n ${codeInstruction} ${parameters};
+		read input;
+	fi
 }
 
 

@@ -128,3 +128,5 @@ exec test
 exit
 exec test
 exit
+exec test step
+exit

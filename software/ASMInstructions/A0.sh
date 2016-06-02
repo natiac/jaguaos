@@ -2,7 +2,7 @@
 
 # A0.sh
 #
-# Move Value to Register (RA, 0123 )
+# Move Value to Register (RA, 01 )
 # @author	Sergio Pohlmann <sergio@ycube.net>
 # @date		May, 11 of 2016
 #
