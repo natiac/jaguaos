@@ -58,6 +58,11 @@ function execInstruction
 			./runProcessor.sh ${par2};			
 			;;
 
+		"jasm")
+			./jasm ${par1};
+			;;
+
+
 		"*")
 			echo "Unrecognized Command";
 			;;

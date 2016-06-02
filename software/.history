@@ -156,3 +156,12 @@ exec test step
 exec test step
 exec test step
 exit
+exec test
+jasm test.asm
+jasm test.asm
+jasm test.asm
+jasm test.asm
+exec test
+exec test step
+exec test
+exit

@@ -27,6 +27,7 @@ _jmp;		A9;		4;		Salta la ejecución para una posición de memoria
 
 _loop;		AA;		4;		Makes a loop to an Memory Address
 
+_nop;		AB;		0;		Makes nothing
 
 .RA;		C1;				Register RA
 
