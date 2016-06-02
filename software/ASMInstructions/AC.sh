@@ -18,10 +18,7 @@ baseDir="/opt";
 parameters=$1
 
 firstCode=${parameters:0:2};
-secCode=${parameters:2:2};
-
-echo "secCode: ${secCode}"
-
+secCode=${parameters:2:4};
 
 register=`grep ".${firstCode};" ${ASMInstDir}/ASMTable.sh | cut -d";" -f 1 | tr -d '[[:space:]]'`;
 register=${register/.};
@@ -40,8 +37,6 @@ decSec=`echo $((16#${secValue}))`
 value=$(( decFirst - decSec ));
 
 writeACC ${value};
-
-echo "comparar $first= $decFirst con $sec= $decSec";
 
 
 

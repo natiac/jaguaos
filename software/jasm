@@ -136,13 +136,35 @@ function testCommand
 			"cmp")
 
 				# Define Code of function and parameters
-				defineASMParameters "cmp";
+				defineASMParameters "cmp" ${par1} ${par2};
 				defineCodePar1;
 				defineCodePar2;
-
 				# Increase the string with code
-				prepareCode "${codeString}${codeFunction}"
+				prepareCode "${codeString}${codeFunction}${codePar1}${codePar2}"
 				;;
+
+
+
+			"je")
+
+				# Find Routine Address
+				direction=`cat ${labelTempFile}| grep "${par1}"| cut -d" " -f2`;
+				direction=`printf '%04X' ${direction}`;
+
+				zeroFlag=$( readFlag "ZF" );
+				
+				if [ "$zeroFlag" == "1" ] ; then
+
+					# Define Code of function 
+					defineASMParameters "jmp" direction;
+
+					# Increase the string with code
+					prepareCode "${codeString}${codeFunction}${direction}"
+				fi 
+
+
+				;;				
+
 
 			"end")
 

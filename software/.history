@@ -190,3 +190,20 @@ exec jmp
 jasm jmp.asm
 exec jmp
 exit
+jasm jmp.asm
+exec jmp.asm
+exec jmp
+exec jmp step
+exec jmp
+exec jmp
+jasm jmp.asm
+jasm jmp.asm
+jasm jmp.asm
+exec jmp
+jasm jmp.asm
+exec jmp step
+exec jmp
+exec jmp
+jasm jmp.asm
+jasm jmp.asm
+exec jmp
