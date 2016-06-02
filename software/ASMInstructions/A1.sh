@@ -1,8 +1,8 @@
 #!/bin/bash 
 
-# A0.sh
+# A1.sh
 #
-# Move Value to Register (RA, 0123 )
+# Move Register Contents to another Register (RA, RB )
 # @author	Sergio Pohlmann <sergio@ycube.net>
 # @date		May, 11 of 2016
 #

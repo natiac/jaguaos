@@ -20,9 +20,12 @@ int
 
 mov DR, offset segunda
 mov RA, 1
+
 int
 
-jmp label_A
+cmp RA, RB
+
+je label_A
 
 
 : label_B

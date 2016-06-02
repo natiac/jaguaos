@@ -29,6 +29,8 @@ _loop;		AA;		4;		Makes a loop to an Memory Address
 
 _nop;		AB;		0;		Makes nothing
 
+_cmp;		AC; 	4;		Compare two registers and stores results in ACC
+
 .RA;		C1;				Register RA
 
 .RB;		C2;				Register RB

@@ -133,6 +133,17 @@ function testCommand
 				prepareCode "${codeString}${codeFunction}"
 				;;
 
+			"cmp")
+
+				# Define Code of function and parameters
+				defineASMParameters "cmp";
+				defineCodePar1;
+				defineCodePar2;
+
+				# Increase the string with code
+				prepareCode "${codeString}${codeFunction}"
+				;;
+
 			"end")
 
 				# Define Code of function and parameters
