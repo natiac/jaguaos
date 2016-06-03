@@ -142,3 +142,13 @@ function writeRowCol
 }
 
 
+# Create a stack Pointer
+function writeSP
+{
+	SP=${1};
+	hex=`printf '%04X' ${SP}`;
+	echo ${hex} > ${mpDir}/SP;
+}
+
+
+

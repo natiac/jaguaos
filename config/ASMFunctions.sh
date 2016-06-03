@@ -160,6 +160,16 @@ function writeFlag
 }
 
 
+# Read a Flag Value
+function readFlag
+{
+	flag=${1};
+	value=`cat ${mpDir}/${flag}.alu`;
+	echo ${value};
+}
+
+
+
 # Create a file to show register status in monitor
 function touchStatus
 {

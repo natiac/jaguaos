@@ -104,6 +104,10 @@ function updateMemory
 
 	# Update Program Counter
 	writeToRegister "PC" ${stack};
+
+	# Create a stack pointer
+	stackPointer=$(( ${stackLengh} - 1 ));
+	writeSP ${stackPointer};
 }
 
 
