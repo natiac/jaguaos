@@ -48,6 +48,7 @@ testInstruction "mov DR, 1234"	X0C51234;
 testInstruction "dec RA"		A6C1;
 testInstruction "inc RA"		A5C1;
 testInstruction "jmp 0123"		A90123;
+testInstruction "push RB"		ADC2;
 
 
 echo

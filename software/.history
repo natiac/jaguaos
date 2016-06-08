@@ -222,3 +222,22 @@ exec test
 jasm jmp.asm
 exec jmp
 exec jmp
+dir
+jasm test.asm
+exec test
+jasm test.asm
+exec test
+exec test debug
+exec test step
+exit
+jasm test.asm
+exec test
+exec jmp
+jasm test.asm
+exec test step
+exec test
+jasm test.asm
+exec test
+exit
+jasm test.asm
+exit

@@ -177,6 +177,19 @@ function testCommand
 				prepareCode "${codeString}${codeFunction}"
 				;;
 
+			"push")
+
+				# Define Code of function and parameters
+				defineASMParameters "push" ${par1};
+				defineCodePar1;
+				# Increase the string with code
+				prepareCode "${codeString}${codeFunction}${codePar1}"
+				;;
+
+
+			"pop")
+				;;
+
 			"jump" | "jmp")
 
 				# Find Routine Address

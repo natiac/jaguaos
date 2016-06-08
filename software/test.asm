@@ -6,9 +6,9 @@
 
 
 
-define primera "Primera Variable"		; Define la variable "primera"
+define primera "Hola\n\n"		; Define la variable "primera"
 
-define segunda "Segunda Variable"
+define segunda "\txXXXXXXXX"
 
 
 
@@ -23,21 +23,12 @@ org 010							; Define espacio de pila
 mov RA, 2						; Clear Screen Function
 int
 
-jump rutina
 
-mov DR, offset primera
-mov RA, 1
-int 							; Llama la interrupción
+mov RB, A
+push RB
+
+
+
+
 
 end
-
-
-sub rutina
-
-mov DR, offset segunda			; Carga posicion inicial de  "segunda"
-mov RA, 1
-
-int 							; Llama la interrupción
-
-ret 							; End Program
-
