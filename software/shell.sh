@@ -73,6 +73,9 @@ function execInstruction
 function loadFile
 {
 	. ${1};
+	stackDec=`echo $((16#${stack}))`;
+	echo ${stackDec} > ${mpDir}/stack;
+
 }
 
 

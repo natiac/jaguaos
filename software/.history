@@ -241,3 +241,24 @@ exec test
 exit
 jasm test.asm
 exit
+exec test
+exit
+jasm test.asm
+exec test step
+exec test
+exec test step
+jasm test.asm
+exec test step
+exec test
+dir
+cat test.exe
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test step
+jasm test.asm
+exec test
+exit

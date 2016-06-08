@@ -31,9 +31,9 @@ _nop;		AB;		0;		Makes nothing
 
 _cmp;		AC; 	4;		Compare two registers and stores results in ACC
 
-_push;		AD;		0;		Push data into Stack Pointer
+_push;		AD;		2;		Push data into Stack 
 
-_pop; 		AE;		0;		Pop data from Stack Pointer
+_pop; 		AE;		2;		Pop data from Stack 
 
 .RA;		C1;				Register RA
 

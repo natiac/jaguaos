@@ -1,8 +1,8 @@
 #!/bin/bash 
 
-# AD.sh
+# AE.sh
 #
-# Push - Push data to the Stack
+# Pop - Pop data from Stack
 # @author	Sergio Pohlmann <sergio@ycube.net>
 # @date		June, 08 of 2016
 #
@@ -20,13 +20,14 @@ regCode=$1
 register=`grep ".${regCode};" ${ASMInstDir}/ASMTable.sh | cut -d";" -f 1 | tr -d '[[:space:]]'`;
 register=${register/.};
 
-value=$( readRegister ${register});
-
 SP=$( readSP );
 
-writeMemoryPosition ${SP} ${value};
+increaseSP ${SP};
 
-decreaseSP ${SP};
+readMemoryPosition ${SP};
+
+writeToRegister ${register} ${char};
+
 
 
 
