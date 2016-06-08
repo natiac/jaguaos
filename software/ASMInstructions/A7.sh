@@ -48,7 +48,14 @@ function interrupt
 {
 	function=$(readRegister RA);
 	case $function in
+		
 		"0") # Print char in RB
+
+			char=$( readRegister "RB" );
+			row=$(readActualRow);
+			col=$(readActualCol);
+			printCharInMemory $char;
+			refreshScreen;			
 			;;
 
 		"1") # Print a string started in a DR address

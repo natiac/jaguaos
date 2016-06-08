@@ -24,10 +24,12 @@ mov RA, 2						; Clear Screen Function
 int
 
 
-mov RB, B
-push RB
+mov RC, C
 push RC
-pop RA
+pop RB
+
+mov RA, 0
+int
 
 
 

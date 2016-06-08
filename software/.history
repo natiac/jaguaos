@@ -262,3 +262,15 @@ exec test step
 jasm test.asm
 exec test
 exit
+jasm test.asm
+exec test
+jasm test.asm
+exec test
+exec test
+jasm test.asm
+exec test
+jasm test.asm
+exec test
+jasm test.asm
+exec test
+exit

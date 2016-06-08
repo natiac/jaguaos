@@ -15,7 +15,7 @@ baseDir="/opt";
 . ${baseDir}/jaguaOs/config/Basefunctions.sh
 
 
-regCode=$1
+regCode=$1;
 
 register=`grep ".${regCode};" ${ASMInstDir}/ASMTable.sh | cut -d";" -f 1 | tr -d '[[:space:]]'`;
 register=${register/.};
