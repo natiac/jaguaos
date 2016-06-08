@@ -195,6 +195,16 @@ function testCommand
 				prepareCode "${codeString}${codeFunction}${codePar1}"
 				;;
 
+
+			"pushr")
+
+				# Define Code of function and parameters
+				defineASMParameters "pushr";
+				# Increase the string with code
+				prepareCode "${codeString}${codeFunction}"
+				;;
+
+
 			"jump" | "jmp")
 
 				# Find Routine Address

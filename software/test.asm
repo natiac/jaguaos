@@ -18,19 +18,18 @@ define segunda "\txXXXXXXXX"
 
 ; Code
 
-org 010							; Define espacio de pila
+org 020							; Define espacio de pila
 
 mov RA, 2						; Clear Screen Function
 int
 
-
+mov RA, A
+mov RB, B
 mov RC, C
-push RC
-pop RB
+mov RD, D
+mov DR, 0DD0
 
-mov RA, 0
-int
-
+pushr
 
 
 

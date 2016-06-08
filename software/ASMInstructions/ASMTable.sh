@@ -35,6 +35,10 @@ _push;		AD;		2;		Push data into Stack
 
 _pop; 		AE;		2;		Pop data from Stack 
 
+_pushr;		AF;		0;		Push all registers in the Stack
+
+_popr;		B0;		0; 		Pop all registers from stack
+
 .RA;		C1;				Register RA
 
 .RB;		C2;				Register RB

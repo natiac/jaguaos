@@ -274,3 +274,19 @@ exec test
 jasm test.asm
 exec test
 exit
+jasm test.asm
+jasm test.asm
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+exec test
+jasm test.asm
+exec test
+exit
