@@ -236,6 +236,26 @@ function testCommand
 				prepareCode "${codeString}${codeFunction}${direction}"
 				;;
 
+			"jnz")
+
+				# Find Routine Address
+				direction=`cat ${labelTempFile}| grep "${par1}"| cut -d" " -f2`;
+				direction=`printf '%04X' ${direction}`;
+
+				zeroFlag=$( readFlag "ZF" );
+				
+				if [ "$zeroFlag" == "0" ] ; then
+
+					# Define Code of function 
+					defineASMParameters "jmp" direction;
+
+					# Increase the string with code
+					prepareCode "${codeString}${codeFunction}${direction}"
+				fi 
+
+
+				;;	
+
 
 			*)
 				echo "Invalid instruction [${command}] in line [${row}]";
