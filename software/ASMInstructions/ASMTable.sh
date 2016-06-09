@@ -25,6 +25,8 @@ _end;		A8;		0;		Terminate a program
 
 _jmp;		A9;		4;		Salta la ejecución para una posición de memoria
 
+_stpc;      AX;     4;      Store a Direction in the PC register
+
 _loop;		AA;		4;		Makes a loop to an Memory Address
 
 _nop;		AB;		0;		Makes nothing

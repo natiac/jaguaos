@@ -214,6 +214,15 @@ function testCommand
 				;;
 
 
+			"stpc")
+
+				# Define Code of function and parameters
+				defineASMParameters "stpc";
+				# Increase the string with code
+				prepareCode "${codeString}${codeFunction}${direction}"
+				;;
+
+
 			"jump" | "jmp")
 
 				# Find Routine Address
